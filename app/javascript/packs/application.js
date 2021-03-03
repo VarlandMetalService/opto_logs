@@ -5,9 +5,26 @@
 
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
-import * as ActiveStorage from "@rails/activestorage"
-import "channels"
+// import * as ActiveStorage from "@rails/activestorage"
+// import "channels"
 
 Rails.start()
 Turbolinks.start()
-ActiveStorage.start()
+// ActiveStorage.start()
+
+import * as bootstrap from 'bootstrap'
+import "../stylesheets/application"
+import "../stylesheets/varland"
+import "@fortawesome/fontawesome-free/js/all"
+
+document.addEventListener("DOMContentLoaded", function(event) {
+  var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+  popoverTriggerList.map(function (popoverTriggerEl) {
+    return new bootstrap.Popover(popoverTriggerEl)
+  })
+
+  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+  tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl)
+  })
+})

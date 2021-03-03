@@ -1,0 +1,13 @@
+thead.table-dark
+  tr
+    th Date/Time
+    th Low pH Limit
+    th High pH Limit
+    th pH Reading
+tbody
+  - @logs.each do |log|
+    tr
+      td = log.log_at.strftime "%m/%d/%y %H:%M:%S"
+      td = log.low_limit
+      td = log.high_limit
+      td = log.reading

@@ -1,0 +1,23 @@
+.header.bg-secondary.text-white
+  - if params[:with_type]
+    = link_to "Remove Type Filter", request.params.except(:with_type)
+  - else
+    | Header
+
+table.table.table-striped.table-hover.small.mb-0
+  - begin
+    == render "logs/specific_logs/#{params[:with_type].underscore}"
+  - rescue
+    thead.table-dark
+      tr
+        th Date/Time
+        th Controller
+        th Type
+        th Details
+    tbody
+      - @logs.each do |log|
+        tr
+          td = log.log_at.strftime "%m/%d/%y %H:%M:%S"
+          td = log.controller_name
+          td = link_to log.log_type, request.params.merge({with_type: log.type})
+          td = log.details.html_safe

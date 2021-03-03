@@ -1,0 +1,27 @@
+/* Utilities available everywhere */
+@import "utilities/variables.scss",
+        "utilities/functions.scss",
+        "utilities/size-utilities.scss",
+        "utilities/colors.scss",
+        "utilities/flex.scss";
+
+/* Specific components */
+/*
+@import "components/nav.scss",
+        "components/download.scss";
+*/
+
+.header {
+  height: $header-height;
+  position: sticky;
+  top: 0;
+}
+
+table.small {
+  font-size: 0.75rem;
+}
+
+th {
+  position: sticky;
+  top: $header-height;
+}
