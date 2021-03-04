@@ -17,3 +17,12 @@ th {
   top: $header-height;
   white-space: nowrap;
 }
+
+.filter-form {
+  label {
+    font-size: 0.875rem;
+    font-weight: 700;
+    margin-bottom: 0;
+    text-transform: uppercase;
+  }
+}

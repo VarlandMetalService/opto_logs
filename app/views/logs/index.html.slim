@@ -14,6 +14,6 @@ table.table.table-striped.table-hover.small.mb-0
       - @logs.each do |log|
         tr
           td.text-nowrap = log.log_at.strftime "%m/%d/%y %H:%M:%S"
-          td.text-nowrap = log.controller_name
+          td.text-nowrap = link_to log.controller_name, request.params.merge({with_controller: log.controller_name})
           td.text-nowrap = link_to log.log_type, request.params.merge({with_type: log.type})
           td = log.details.html_safe

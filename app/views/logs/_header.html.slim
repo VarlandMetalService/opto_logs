@@ -2,11 +2,10 @@
   .logo.m-2.d-flex.flex-row.justify-content-start.align-items-center
     = image_tag "logo.svg"
     h1.ms-2 Opto&nbsp;Logs
+  .m-2.d-flex.flex-row.justify-content-start.align-items-center.nav-buttons
+    - unless params[:with_type].blank?
+      = link_to '<i class="fas fa-file-excel"></i> Download'.html_safe, request.params.merge({format: :csv}), class: ['btn', 'btn-sm', 'btn-success', 'ms-2']
   .m-2
     == render "pagination"
-  .m-2.d-flex.flex-row.justify-content-start.align-items-center.nav-buttons
-    - if params[:with_type]
-      = link_to '<i class="fas fa-file-excel"></i> Download'.html_safe, request.params.merge({format: :csv}), class: ['btn', 'btn-sm', 'btn-success', 'ms-2']
-    button.btn.btn-primary.btn-sm.d-none type="button" data-toggle="collapse" data-target="#thickness-filters"
-      i.fas.fa-filter
-      | Filters
+
+== render "filter_form"

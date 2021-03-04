@@ -33,3 +33,4 @@ end
 
 gem 'slim'
 gem 'pagy'
+gem 'has_scope'

@@ -1,0 +1,18 @@
+.container-fluid.bg-dark.text-white.py-2.filter-form
+  = form_with method: 'get' do |f|
+    .row
+      .col
+        label.form-label.text-warning for="with_controller" Controller:
+        = f.select "with_controller", options_for_select(@unpaged_logs.map { |log| log.controller_name }.uniq.sort, params[:with_controller]), { include_blank: true }, class: "form-select", onchange: 'this.form.submit();'
+      .col
+        label.form-label.text-warning for="with_type" Type:
+        = f.select "with_type", options_for_select(@unpaged_logs.map { |log| [log.log_type, log.type] }.uniq.sort, params[:with_type]), { include_blank: true }, class: "form-select", onchange: 'this.form.submit();'
+      .col
+        label.form-label.text-warning for="with_date_gte" Start Date:
+        = f.datetime_field "with_date_gte", class: "form-control", value: params[:with_date_gte], onchange: 'this.form.submit();'
+      .col
+        label.form-label.text-warning for="with_date_lte" End Date:
+        = f.datetime_field "with_date_lte", class: "form-control", value: params[:with_date_lte], onchange: 'this.form.submit();'
+      .col
+        label.form-label.text-warning for="sorted_by" Sorted By:
+        = f.select "sorted_by", options_for_select([["Oldest First", "oldest"], ["Newest First", "newest"]], params[:sorted_by]), {}, class: "form-select", onchange: 'this.form.submit();'

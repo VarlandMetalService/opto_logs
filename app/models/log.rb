@@ -14,6 +14,33 @@ class Log < ApplicationRecord
   # Callbacks.
   after_create  :process_notification
 
+  # Scopes.
+  scope :with_date_gte, ->(value) {
+    return if value.blank?
+    where("log_at >= ?", value)
+  }
+  scope :with_date_lte,  ->(value) {
+    return if value.blank?
+    where("log_at <= ?", value)
+  }
+  scope :with_controller, ->(value) {
+    return if value.blank?
+    where(controller_name: value)
+  }
+  scope :with_type, ->(value) {
+    return if value.blank?
+    where(type: value)
+  }
+  scope :sorted_by, ->(value) {
+    return if value.blank?
+    case value
+    when 'newest'
+      order(log_at: :desc)
+    when 'oldest'
+      order(:log_at)
+    end
+  }
+
   # Instance methods.
 
   # Returns notification settings for log. Should be overridden in child class.
