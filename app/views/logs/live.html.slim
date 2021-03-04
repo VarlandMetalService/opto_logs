@@ -1,0 +1,11 @@
+.d-flex.flex-row.justify-content-between.align-items-center.bg-dark.text-white.header
+  .logo.m-2.d-flex.flex-row.justify-content-start.align-items-center
+    = image_tag "logo.svg"
+    h1.ms-2
+      | Opto&nbsp;Logs
+      small.text-danger
+        |  Live Stream
+
+table.table.table-striped.mb-0
+  tbody id="live-container" data-controller=params[:with_controller].to_s.titleize
+    == render partial: "log", collection: @logs

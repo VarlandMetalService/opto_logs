@@ -13,6 +13,7 @@ class Log < ApplicationRecord
 
   # Callbacks.
   after_create  :process_notification
+  after_create_commit { LogBroadcastJob.perform_later self }
 
   # Scopes.
   scope :with_date_gte, ->(value) {
@@ -25,7 +26,7 @@ class Log < ApplicationRecord
   }
   scope :with_controller, ->(value) {
     return if value.blank?
-    where(controller_name: value)
+    where(controller_name: value.titleize)
   }
   scope :with_type, ->(value) {
     return if value.blank?
@@ -42,6 +43,11 @@ class Log < ApplicationRecord
   }
 
   # Instance methods.
+
+  # Returns badge classes for log. May be overridden in child class.
+  def badge_classes
+    return ["text-dark", "bg-light"]
+  end
 
   # Returns notification settings for log. Should be overridden in child class.
   def notification_settings

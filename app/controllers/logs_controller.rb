@@ -3,7 +3,7 @@ class LogsController < ApplicationController
   # Define filters available for has_scope gem.
   has_scope :sorted_by, only: :index
   has_scope :with_type, only: :index
-  has_scope :with_controller, only: :index
+  has_scope :with_controller, only: [:index, :live]
   has_scope :with_date_lte, only: :index
   has_scope :with_date_gte, only: :index
 
@@ -27,6 +27,11 @@ class LogsController < ApplicationController
         send_data @logs.to_csv, filename: "#{@logs[0].type}_#{DateTime.current.strftime("%Y%m%d_%H%M%S")}.csv"
       }
     end
+  end
+
+  # Live log listing.
+  def live
+    @logs = apply_scopes(Log.sorted_by("newest")).limit(20)
   end
   
 end

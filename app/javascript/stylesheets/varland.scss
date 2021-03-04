@@ -26,3 +26,24 @@ th {
     text-transform: uppercase;
   }
 }
+
+.live-highlight {
+  animation: bg-highlight 60s normal;
+  animation-iteration-count: 1;
+  td:last-child {
+    animation: font-highlight 60s normal;
+    animation-iteration-count: 1;
+  }
+}
+
+@keyframes bg-highlight {
+  0% { background-color: $color-yellow-200; }
+  25% { background-color: $color-yellow-200; }
+  100% { background-color: auto; }
+}
+
+@keyframes font-highlight {
+  0% { font-weight: 900; }
+  25% { font-weight: 900; }
+  100% { font-weight: auto; }
+}
