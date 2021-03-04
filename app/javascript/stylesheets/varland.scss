@@ -30,10 +30,12 @@ th {
 .live-highlight {
   animation: bg-highlight 60s normal;
   animation-iteration-count: 1;
+  /*
   td:last-child {
     animation: font-highlight 60s normal;
     animation-iteration-count: 1;
   }
+  */
 }
 
 @keyframes bg-highlight {
@@ -44,6 +46,6 @@ th {
 
 @keyframes font-highlight {
   0% { font-weight: 900; }
-  99% { font-weight: 900; }
+  25% { font-weight: 900; }
   100% { font-weight: auto; }
 }
