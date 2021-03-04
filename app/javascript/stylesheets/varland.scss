@@ -6,16 +6,7 @@
         "utilities/flex.scss";
 
 /* Specific components */
-/*
-@import "components/nav.scss",
-        "components/download.scss";
-*/
-
-.header {
-  height: $header-height;
-  position: sticky;
-  top: 0;
-}
+@import "components/header.scss";
 
 table.small {
   font-size: 0.75rem;
@@ -24,4 +15,5 @@ table.small {
 th {
   position: sticky;
   top: $header-height;
+  white-space: nowrap;
 }

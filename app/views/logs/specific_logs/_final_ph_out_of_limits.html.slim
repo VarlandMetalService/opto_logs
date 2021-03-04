@@ -1,13 +1,13 @@
 thead.table-dark
   tr
     th Date/Time
-    th Low pH Limit
-    th High pH Limit
-    th pH Reading
+    th.text-center Low pH Limit
+    th.text-center High pH Limit
+    th.text-center pH Reading
 tbody
   - @logs.each do |log|
     tr
-      td = log.log_at.strftime "%m/%d/%y %H:%M:%S"
-      td = log.low_limit
-      td = log.high_limit
-      td = log.reading
+      td.text-nowrap = log.log_at.strftime "%m/%d/%y %H:%M:%S"
+      td.text-nowrap.text-center = log.low_limit
+      td.text-nowrap.text-center = log.high_limit
+      td.text-nowrap.text-center = log.reading

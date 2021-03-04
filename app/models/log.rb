@@ -1,4 +1,5 @@
 require 'json'
+require 'csv'
 
 class Log < ApplicationRecord
 
@@ -64,7 +65,32 @@ class Log < ApplicationRecord
     return JSON.parse(self.json_data, symbolize_names: true)
   end
 
+  # Returns headers for CSV file. Should be overridden in child class.
+  def csv_headers
+    return %w{log_at controller_name type details}
+  end
+
+  # Returns data for CSV file. Should be overridden in child class.
+  def to_csv
+    attributes = %w{log_at controller_name type details}
+    return attributes.map {|attr| self.send(attr) }
+  end
+
   # Class methods.
+
+  # Formats records for CSV file. Should be overridden in child class.
+  def self.to_csv
+    included_headers = false
+    CSV.generate(headers: true) do |csv|
+      all.each do |log|
+        unless included_headers
+          csv << log.csv_headers
+          included_headers = true
+        end
+        csv << log.to_csv
+      end
+    end
+  end
 
   # Parses log details from passed JSON.
   def self.parse(json)
