@@ -111,6 +111,32 @@ class Log < ApplicationRecord
 
   # Class methods.
 
+  # Get filter options for controller.
+  def self.controller_options(with_controller, with_type)
+    return [with_controller] unless with_controller.blank?
+    return Log.with_type(with_type).distinct.pluck(:controller_name).sort
+  end
+
+  # Get filter options for type.
+  def self.type_options(with_controller, with_type)
+    substitutions = [["Ph", "pH"], ["En", "EN"]]
+    raw = []
+    if with_type.blank?
+      raw = Log.with_controller(with_controller).distinct.pluck(:type)
+    else
+      raw << with_type
+    end
+    type_options = []
+    raw.each do |type|
+      formatted = type.demodulize.titleize
+      substitutions.each do |sub|
+        formatted.gsub!(sub[0], sub[1])
+      end
+      type_options << [formatted, type]
+    end
+    return type_options.sort
+  end
+
   # Formats records for CSV file. Should be overridden in child class.
   def self.to_csv
     included_headers = false

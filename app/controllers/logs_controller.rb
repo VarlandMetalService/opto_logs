@@ -12,11 +12,10 @@ class LogsController < ApplicationController
     params[:sorted_by] = 'newest' if params[:sorted_by].blank?
     respond_to do |format|
       format.html {
-        @unpaged_logs = apply_scopes(Log.all)
         begin
-          @pagy, @logs = pagy(@unpaged_logs, items: 100)
+          @pagy, @logs = pagy(apply_scopes(Log.all), items: 100)
         rescue
-          @pagy, @logs = pagy(@unpaged_logs, items: 100, page: 1)
+          @pagy, @logs = pagy(apply_scopes(Log.all), items: 100, page: 1)
         end
       }
       format.json {
