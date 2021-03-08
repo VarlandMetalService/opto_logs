@@ -22,3 +22,7 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+- Redis running on production server.
+- Sidekiq service defined in `/lib/systemd/system/sidekiq-optologs.service`. Enabled and started on production server.
+- Rake task `fix_unconfigured_logs` manually added to crontab on production server because it didn't seem to work using the Whenever gem.
