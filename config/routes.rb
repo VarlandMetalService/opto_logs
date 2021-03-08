@@ -1,4 +1,9 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
+
+  # Mount Sidekiq.
+  mount Sidekiq::Web => "/sidekiq"
 
   # Set up ActionCable for live updates.
   mount ActionCable.server => '/cable'

@@ -12,7 +12,7 @@ class Log < ApplicationRecord
             presence: true
 
   # Callbacks.
-  after_create  :process_notification
+  after_create_commit :process_notification
   after_create_commit { LogBroadcastJob.perform_later self }
 
   # Scopes.
