@@ -16,9 +16,9 @@ class FinalPhReallyOutOfLimits < Log
   # Returns notification settings for log.
   def notification_settings
     return {
-      enabled: false,
+      enabled: true,
       subject: "Waste Water: Final pH Really Out of Limits",
-      recipients: [IT_ONLY_EMAIL]
+      recipients: [TOBY_VARLAND_SMS]
     }
   end
 
