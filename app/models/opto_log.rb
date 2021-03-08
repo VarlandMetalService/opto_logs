@@ -7,7 +7,7 @@ class OptoLog < Log
     return {
       enabled: true,
       subject: "🔴 Unconfigured Opto Log Recorded",
-      recipients: [TOBY_VARLAND_EMAIL]
+      recipients: [IT_ONLY_EMAIL]
     }
   end
 
