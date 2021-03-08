@@ -14,15 +14,23 @@ table.small {
 
 th {
   position: sticky;
-  top: $header-height;
+  top: 0;
   white-space: nowrap;
+}
+
+@media (min-width: breakpoint(md)) {
+  th {
+    top: $header-height;
+  }
 }
 
 .filter-form {
   label {
     font-size: 0.875rem;
     font-weight: 700;
-    margin-bottom: 0;
+    line-height: 1;
+    margin: 0;
+    padding: 0;
     text-transform: uppercase;
   }
 }
