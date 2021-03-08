@@ -5,7 +5,7 @@ class OptoLog < Log
   # Returns notification settings for log.
   def notification_settings
     return {
-      enabled: true,
+      enabled: false,
       subject: "🔴 Unconfigured Opto Log Recorded",
       recipients: [IT_ONLY_EMAIL]
     }

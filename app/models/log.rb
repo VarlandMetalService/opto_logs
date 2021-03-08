@@ -80,12 +80,7 @@ class Log < ApplicationRecord
 
   # Returns human readable log type. May be overridden in child class for special cases.
   def log_type
-    type = self.type.demodulize.titleize
-    substitutions = [["Ph", "pH"], ["En", "EN"]]
-    substitutions.each do |sub|
-      type.gsub!(sub[0], sub[1])
-    end
-    return type
+    return Log.humanize_log_type(self.type)
   end
 
   # Default details string. Should be overridden in child class.
@@ -111,6 +106,16 @@ class Log < ApplicationRecord
 
   # Class methods.
 
+  # Humanizes log type.
+  def self.humanize_log_type(type)
+    formatted = type.demodulize.titleize
+    substitutions = [["Ph", "pH"], ["En", "EN"]]
+    substitutions.each do |sub|
+      formatted.gsub!(sub[0], sub[1])
+    end
+    return formatted
+  end
+
   # Get filter options for controller.
   def self.controller_options(with_controller, with_type)
     return [with_controller] unless with_controller.blank?
@@ -119,7 +124,6 @@ class Log < ApplicationRecord
 
   # Get filter options for type.
   def self.type_options(with_controller, with_type)
-    substitutions = [["Ph", "pH"], ["En", "EN"]]
     raw = []
     if with_type.blank?
       raw = Log.with_controller(with_controller).distinct.pluck(:type)
@@ -128,11 +132,7 @@ class Log < ApplicationRecord
     end
     type_options = []
     raw.each do |type|
-      formatted = type.demodulize.titleize
-      substitutions.each do |sub|
-        formatted.gsub!(sub[0], sub[1])
-      end
-      type_options << [formatted, type]
+      type_options << [Log.humanize_log_type(type), type]
     end
     return type_options.sort
   end
