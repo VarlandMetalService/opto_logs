@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.1'
+ruby '2.6.3'
 
 gem 'rails', '~> 6.1.3'
 gem 'mysql2', '~> 0.5'
@@ -36,7 +36,6 @@ gem 'pagy'
 gem 'has_scope'
 gem 'redis'
 gem 'sidekiq'
-gem 'whenever', require: false
 
 gem 'capistrano', '~> 3.11'
 gem 'capistrano-rails', '~> 1.4'

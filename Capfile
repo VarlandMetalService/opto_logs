@@ -42,6 +42,4 @@ require 'capistrano/passenger'
 require 'capistrano/rbenv'
 
 set :rbenv_type, :user
-set :rbenv_ruby, '2.7.1'
-
-require "whenever/capistrano"
+set :rbenv_ruby, '2.6.3'
