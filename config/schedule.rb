@@ -20,5 +20,5 @@
 # Learn more: http://github.com/javan/whenever
 
 every 5.minutes do
-  runner "OptoLog.fix_unconfigured"
+  rake "fix_unconfigured_logs"
 end
