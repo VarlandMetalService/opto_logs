@@ -36,6 +36,7 @@ gem 'pagy'
 gem 'has_scope'
 gem 'redis'
 gem 'sidekiq'
+gem 'whenever', require: false
 
 gem 'capistrano', '~> 3.11'
 gem 'capistrano-rails', '~> 1.4'

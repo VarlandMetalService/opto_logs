@@ -16,4 +16,13 @@ class OptoLog < Log
     "Unconfigured Opto Log"
   end
 
+  # Class methods.
+
+  # Update type of all unconfigured logs whenever possible.
+  def self.fix_unconfigured
+    OptoLog.all.each do |log|
+      log.update_type
+    end
+  end
+
 end

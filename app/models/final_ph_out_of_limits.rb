@@ -2,7 +2,7 @@ class FinalPhOutOfLimits < Log
 
   # Instance methods.
 
-  # Returns badge classes for log. May be overridden in child class.
+  # Returns badge classes for log.
   def badge_classes
     return ["text-white", "bg-red-500"]
   end

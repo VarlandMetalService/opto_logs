@@ -104,6 +104,39 @@ class Log < ApplicationRecord
     return attributes.map {|attr| self.send(attr) }
   end
 
+  # Parse attributes from JSON.
+  def parse(json)
+    self.controller_name = json[:controller]
+    self.log_at = json[:timestamp].present? ? Time.zone.parse(json[:timestamp]) : DateTime.current
+    self.json_data = ::ActiveSupport::JSON.encode(json)
+    [:lane, :station, :shop_order, :load, :barrel, :customer, :process, :part, :sub, :reading, :limit, :low_limit, :high_limit].each do |attr|
+      self[attr] = json.fetch(attr, nil)
+    end
+  end
+
+  # Example of how to extend in child class:
+  #     def parse(json)
+  #       super
+  #       self.attribute = ...
+  #       self.attribute = ...
+  #       self.attribute = ...
+  #     end
+
+  # Updates log type and re-parses attributes from passed JSON.
+  def update_type
+    json = JSON.parse(self.json_data, symbolize_names: true)
+    begin
+      log_class = json[:type].camelize.constantize
+      self.type = log_class.to_s
+      self.save
+      updated = Log.find(self.id)
+      updated.parse(json)
+      updated.save
+    rescue
+      return
+    end
+  end
+
   # Class methods.
 
   # Humanizes log type.
@@ -153,23 +186,9 @@ class Log < ApplicationRecord
 
   # Parses log details from passed JSON.
   def self.parse(json)
-    new_log = self.new
-    new_log.controller_name = json[:controller]
-    new_log.log_at = json[:timestamp].present? ? Time.zone.parse(json[:timestamp]) : DateTime.current
-    new_log.json_data = ::ActiveSupport::JSON.encode(json)
-    [:lane, :station, :shop_order, :load, :barrel, :customer, :process, :part, :sub, :reading, :limit, :low_limit, :high_limit].each do |attr|
-      new_log[attr] = json.fetch(attr, nil)
-    end
-    return new_log
+    log = self.new
+    log.parse(json)
+    return log
   end
-
-  # Example of how to extend in child class:
-  #     def self.parse(controller, json)
-  #       new_log = super
-  #       new_log.attribute = ...
-  #       new_log.attribute = ...
-  #       new_log.attribute = ...
-  #       return new_log
-  #     end
 
 end
