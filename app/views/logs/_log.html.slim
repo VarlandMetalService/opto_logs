@@ -2,4 +2,6 @@ tr
   td.text-nowrap.w-1 = log.log_at.strftime "%m/%d/%y %H:%M:%S"
   td.text-nowrap.w-1.text-center
     = controller_badge log.controller_name
+  td.text-nowrap.w-1.text-center
+    = message_type_badge log
   td = log.details.html_safe
