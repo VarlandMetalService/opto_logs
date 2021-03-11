@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   # Set up API endpoints for Groov controllers.
   post "/log",  to: "groovapi#log"
 
+  # Set up admin endpoints.
+  get "/reset_sidekiq", to: "admin#reset_sidekiq_stats"
+
   # Set shortcut URLs.
   root  to: "logs#index"
   get   "/live",  to: "logs#live"

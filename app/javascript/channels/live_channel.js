@@ -16,6 +16,7 @@ document.addEventListener('turbolinks:load', function() {
         if (!targetController || targetController == "" || targetController.toLowerCase() == data.controller.toLowerCase()) {
           container.children().last().remove();
           var log = $(data.log);
+          console.log(log);
           container.prepend(log);
           log.addClass("live-highlight");
         }
