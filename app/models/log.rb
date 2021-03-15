@@ -107,7 +107,7 @@ class Log < ApplicationRecord
   # Parse attributes from JSON.
   def parse(json)
     self.controller_name = json[:controller]
-    self.log_at = json[:timestamp].present? ? Time.zone.parse(json[:timestamp]) : DateTime.current
+    self.log_at = json[:timestamp].present? ? Time.zone.strptime(json[:timestamp], "%m/%d/%Y %H:%M:%S") : DateTime.current
     self.json_data = ::ActiveSupport::JSON.encode(json)
     [:lane, :station, :shop_order, :load, :barrel, :customer, :process, :part, :sub, :reading, :limit, :low_limit, :high_limit].each do |attr|
       self[attr] = json.fetch(attr, nil)
