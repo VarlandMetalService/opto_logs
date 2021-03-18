@@ -1,0 +1,13 @@
+thead.table-dark
+  tr
+    th Date/Time
+    - case log.controller_name
+    - when "epiclc.varland.com"
+      th.text-center epiclc
+tbody
+  - @logs.each do |log|
+    tr
+      td.text-nowrap = log.log_at.strftime "%m/%d/%y %H:%M:%S"
+      - case log.controller_name
+      - when "epiclc.varland.com"
+        td.text-nowrap.text-center = "#{log.opto_data[:epiclc] ? "✔" : "✘"}%"
