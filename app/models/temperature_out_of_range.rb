@@ -11,8 +11,8 @@ class TemperatureOutOfRange < Log
   def notification_settings
     return {
       enabled: true,
-      subject: "Temperature Out of Range",
-      recipients: [TOBY_VARLAND_SMS]
+      subject: "#{self.controller_name}: Temperature Out of Range",
+      recipients: [TOBY_VARLAND_EMAIL]
     }
   end
 
