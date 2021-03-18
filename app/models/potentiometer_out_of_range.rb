@@ -1,29 +1,29 @@
-class FinalPhOutOfLimits < Log
+class PotentiometerOutOfRange < Log
 
   # Instance methods.
 
   # Returns badge classes for log.
   def badge_classes
-    return ["text-white", "bg-red-500"]
+    return ["text-white", "bg-pink-500"]
   end
 
   # Returns notification settings for log.
   def notification_settings
     return {
-      enabled: false,
-      subject: "Waste Water: Final pH Out of Limits",
+      enabled: true,
+      subject: "Potentiometer Out of Range",
       recipients: [TOBY_VARLAND_SMS]
     }
   end
 
   # Default details string.
   def details
-    return "Final pH is out of limits. Low Limit: <code>#{self.low_limit}</code>. High Limit: <code>#{self.high_limit}</code>. Reading: <code>#{self.reading}</code>."
+    return "Potentiometer is out of range. Low Limit: <code>#{self.low_limit}%</code>. High Limit: <code>#{self.high_limit}%</code>. Reading: <code>#{self.reading}%</code>."
   end
 
   # Returns headers for CSV file.
   def csv_headers
-    return ["Date/Time", "Low pH Limit", "High pH Limit", "pH Reading"]
+    return ["Date/Time", "Low Limit (%)", "High Limit (%)", "Reading (%)"]
   end
 
   # Returns data for CSV file.

@@ -21,6 +21,8 @@ module ApplicationHelper
       div_classes << "text_white" << "bg-pink-600"
     when "Waste Water"
       div_classes << "text_white" << "bg-indigo-500"
+    when "epiclc.varland.com"
+      div_classes << "text_white" << "bg-indigo-500"
     else
       div_classes << "text_white" << "bg-red-500"
     end

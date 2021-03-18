@@ -4,7 +4,7 @@ class TemperatureOutOfRange < Log
 
   # Returns badge classes for log.
   def badge_classes
-    return ["text-white", "bg-red-500"]
+    return ["text-white", "bg-yellow-500"]
   end
 
   # Returns notification settings for log.
