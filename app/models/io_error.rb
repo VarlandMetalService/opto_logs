@@ -19,7 +19,7 @@ class IoError < Log
   # Default details string.
   def details
     parts = ["I/O error on one or more bricks."]
-    case this.controller_name
+    case self.controller_name
     when "epiclc.varland.com"
       parts << "epiclc: <code>#{self.opto_data[:epiclc] ? "✔" : "✘"}</code>."
     end
@@ -29,7 +29,7 @@ class IoError < Log
   # Returns headers for CSV file.
   def csv_headers
     fields = ["Date/Time"]
-    case this.controller_name
+    case self.controller_name
     when "epiclc.varland.com"
       fields << "epiclc"
     end
@@ -39,7 +39,7 @@ class IoError < Log
   # Returns data for CSV file.
   def to_csv
     fields = [self.log_at]
-    case this.controller_name
+    case self.controller_name
     when "epiclc.varland.com"
       fields << self.opto_data[:epiclc]
     end
