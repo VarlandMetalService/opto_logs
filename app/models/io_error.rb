@@ -2,6 +2,10 @@ class IoError < Log
 
   # Instance methods.
 
+  def bricks
+    return self.opto_data.except(:type, :controller, :timestamp)
+  end
+
   # Returns badge classes for log.
   def badge_classes
     return ["text-white", "bg-gray-700"]
@@ -19,31 +23,21 @@ class IoError < Log
   # Default details string.
   def details
     parts = ["I/O error on one or more bricks."]
-    case self.controller_name
-    when "epiclc.varland.com"
-      parts << "epiclc: <code>#{self.opto_data[:epiclc] ? "✔" : "✘"}</code>."
-    end
+    self.bricks.each_with_index {|(name, enabled), index|
+      parts << "#{name.to_s}: <code>#{enabled ? "✔" : "✘"}</code>."
+    }
     return parts.join(" ")
   end
 
   # Returns headers for CSV file.
   def csv_headers
-    fields = ["Date/Time"]
-    case self.controller_name
-    when "epiclc.varland.com"
-      fields << "epiclc"
-    end
-    return fields
+    return ["Date/Time", "Controller", "Data"]
   end
 
   # Returns data for CSV file.
   def to_csv
-    fields = [self.log_at]
-    case self.controller_name
-    when "epiclc.varland.com"
-      fields << self.opto_data[:epiclc]
-    end
-    return fields
+    attributes = %w{log_at controller_name opto_data}
+    return attributes.map {|attr| self.send(attr) }
   end
 
 end

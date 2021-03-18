@@ -1,21 +1,30 @@
+ruby:
+  bricks = []
+  @logs.each do |log|
+    bricks << log.bricks.keys
+  end
+  bricks.flatten!.uniq!.sort!
+
 thead.table-dark
   tr
     th.w-1 Date/Time
-    th.w-1.text-center Controller
     - if params[:with_controller].blank?
+      th.w-1.text-center Controller
       th Details
     - else
-      - case @logs.first.controller_name
-      - when "epiclc.varland.com"
-        th.text-center epiclc
+      - bricks.each do |brick|
+        th.text-center.w-1 = brick.to_s
 tbody
   - @logs.each do |log|
     tr
       td.text-nowrap = log.log_at.strftime "%m/%d/%y %H:%M:%S"
-      td.text-nowrap.text-center = link_to controller_badge(log.controller_name), request.params.merge({with_controller: log.controller_name})
       - if params[:with_controller].blank?
+        td.text-nowrap.text-center = link_to controller_badge(log.controller_name), request.params.merge({with_controller: log.controller_name})
         td = log.details.html_safe
       - else
-        - case log.controller_name
-        - when "epiclc.varland.com"
-          td.text-nowrap.text-center = "#{log.opto_data[:epiclc] ? "✔" : "✘"}"
+        - bricks.each do |brick|
+          - if log.bricks.key?(brick)
+            td.text-nowrap.text-center = "<code>#{log.bricks[brick] ? "🟢 enabled" : "🔴 disabled"}</code>".html_safe
+          - else
+            td.text-nowrap.text-center
+              .text-muted brick not defined
