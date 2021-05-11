@@ -1,0 +1,13 @@
+thead.table-dark
+  tr
+    th Date/Time
+    th.text-center Low Limit (&deg; F)
+    th.text-center High Limit (&deg; F)
+    th.text-center Reading (&deg; F)
+tbody
+  - @logs.each do |log|
+    tr
+      td.text-nowrap = log.log_at.strftime "%m/%d/%y %H:%M:%S"
+      td.text-nowrap.text-center == "#{log.low_limit}&deg; F"
+      td.text-nowrap.text-center == "#{log.high_limit}&deg; F"
+      td.text-nowrap.text-center == "#{log.reading}&deg; F"
