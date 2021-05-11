@@ -4,7 +4,7 @@ class SaltSprayTemperatureWarning < Log
 
   # Returns badge classes for log.
   def badge_classes
-    return ["text-white", "bg-pink-500"]
+    return ["text-white", "bg-green-500"]
   end
 
   # Returns notification settings for log.
