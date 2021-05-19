@@ -13,7 +13,7 @@ class Log < ApplicationRecord
 
   # Callbacks.
   after_create_commit :process_notification
-  after_create_commit { LogBroadcastJob.perform_later self }
+  after_create_commit { LogBroadcastJob.perform_now self }
 
   # Scopes.
   scope :with_date_gte, ->(value) {
@@ -74,7 +74,7 @@ class Log < ApplicationRecord
   # Sends notification email if configured.
   def process_notification
     if self.notification_settings[:enabled]
-      OptoMailer.with(log: self).opto_notification.deliver_later
+      OptoMailer.with(log: self).opto_notification.deliver_now
     end
   end
 
