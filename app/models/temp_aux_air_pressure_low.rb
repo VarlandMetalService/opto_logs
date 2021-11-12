@@ -12,13 +12,13 @@ class TempAuxAirPressureLow < Log
     return {
       enabled: true,
       subject: "#{self.controller_name}: Auxiliary Air Pressure Low",
-      recipients: [TOBY_VARLAND_EMAIL]
+      recipients: [TOBY_VARLAND_EMAIL, BRIAN_MANGOLD_EMAIL, JOEL_PERRINE_EMAIL, RICH_BRANSON_SMS, TED_MCKEEHAN_SMS, TOBY_VARLAND_SMS]
     }
   end
 
   # Default details string.
   def details
-    return "Auxiliary air pressure low. Limit: <code>#{self.limit} PSI</code>. Reading: <code>#{self.reading} PSI</code>."
+    return "Auxiliary air pressure low. Limit: <code>#{self.limit} PSI</code>. Reading: <code>#{self.reading} PSI</code>. Groov turned on the Quincy 50HP compressor."
   end
 
   # Returns headers for CSV file.
