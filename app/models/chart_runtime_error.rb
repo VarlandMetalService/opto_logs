@@ -18,7 +18,7 @@ class ChartRuntimeError < Log
 
   # Define function to return chart name.
   def chart
-    return self.opto_date[:device]
+    return self.opto_data[:device]
   end
 
   # Default details string.
