@@ -16,19 +16,24 @@ class ChartRuntimeError < Log
     }
   end
 
+  # Define function to return chart name.
+  def chart
+    return self.opto_date[:device]
+  end
+
   # Default details string.
   def details
-    return "Chart running too long. Limit: <code>#{self.limit} seconds</code>. Runtime: <code>#{self.reading} seconds</code>."
+    return "Chart running too long. Chart: <code>#{self.chart}</code>. Limit: <code>#{self.limit} seconds</code>. Runtime: <code>#{self.reading} seconds</code>."
   end
 
   # Returns headers for CSV file.
   def csv_headers
-    return ["Date/Time", "Limit (sec)", "Runtime (sec)"]
+    return ["Date/Time", "Chart", "Limit (sec)", "Runtime (sec)"]
   end
 
   # Returns data for CSV file.
   def to_csv
-    attributes = %w{log_at limit reading}
+    attributes = %w{log_at chart limit reading}
     return attributes.map {|attr| self.send(attr) }
   end
 

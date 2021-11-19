@@ -1,11 +1,13 @@
 thead.table-dark
   tr
     th Date/Time
+    th Chart
     th.text-center Limit (seconds)
     th.text-center Runtime (seconds)
 tbody
   - @logs.each do |log|
     tr
       td.text-nowrap = log.log_at.strftime "%m/%d/%y %H:%M:%S"
+      td.text-nowrap = "#{log.chart}"
       td.text-nowrap.text-center = "#{log.limit}"
       td.text-nowrap.text-center = "#{log.reading}"
